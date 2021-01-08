@@ -3,8 +3,8 @@
 !defined('DEBUG') AND exit('Access Denied.');
 
 // hook forum_start.php
-$fid = param(1, 0);
-$page = param(2, 1);
+$fid = param(1, 0);			// 获取版块序号
+$page = param(2, 1);		// 获取页号
 $orderby = param('orderby');
 $extra = array(); // 给插件预留
 
@@ -12,13 +12,14 @@ $active = 'default';
 !in_array($orderby, array('tid', 'lastpid')) AND $orderby = 'lastpid';
 $extra['orderby'] = $orderby;
 
-$forum = forum_read($fid);
+$forum = forum_read($fid);		// 获取版块的信息
 empty($forum) AND message(3, lang('forum_not_exists'));
 forum_access_user($fid, $gid, 'allowread') OR message(-1, lang('insufficient_visit_forum_privilege'));
 $pagesize = $conf['pagesize'];
 
 // hook forum_top_list_before.php
 
+// 只有在第一页才会显示置顶的贴子
 $toplist = $page == 1 ? thread_top_find($fid) : array();
 
 // 从默认的地方读取主题列表
@@ -27,7 +28,7 @@ $thread_list_from_default = 1;
 // hook forum_thread_list_before.php
 
 if($thread_list_from_default) {
-	$pagination = pagination(url("forum-$fid-{page}", $extra), $forum['threads'], $page, $pagesize);
+	$pagination = pagination(url("forum-$fid-{page}", $extra), $forum['threads'], $page, $pagesize);	// 生成翻页的html代码
 	$threadlist = thread_find_by_fid($fid, $page, $pagesize, $orderby);
 }
 
