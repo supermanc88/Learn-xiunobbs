@@ -2,7 +2,7 @@
 
 > 此分析建立在4.0.4版本
 >
-> NOTE:所有的请求入口均在`index.php`
+> NOTE:所有的请求入口均在`index.php`，管理入口在`admin/index.php`
 
 
 
