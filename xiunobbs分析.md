@@ -23,15 +23,15 @@
 8. 从`$forumlist_show`中把`fid`和`name`拼成数组到`$forumarr`
 9. 获取路由`$route`，默认是`index`
 10. 通过一个`switch`结构判断`$route`，然后加载不同的路由页
-   1. [route_index.php](#route_index.php)
-   2. [route_thread.php](#route_thread.php)
-   3. [route_forum.php](#route_forum.php)
-   4. [route_user.php](#route_user.php)
-   5. [route_my.php](#route_my.php)
-   6. [route_attach.php](#route_attach.php)
-   7. [route_post.php](#route_post.php)
-   8. [route_mod.php](#route_mod.php)
-   9. [route_browser.php](#route_browser.php)
+       1. [route_index.php](#route_index.php)
+       2. [route_thread.php](#route_thread.php)
+       3. [route_forum.php](#route_forum.php)
+       4. [route_user.php](#route_user.php)
+       5. [route_my.php](#route_my.php)
+       6. [route_attach.php](#route_attach.php)
+       7. [route_post.php](#route_post.php)
+       8. [route_mod.php](#route_mod.php)
+       9. [route_browser.php](#route_browser.php)
 
 ## <span id="route_index.php">route_index.php</span>
 
