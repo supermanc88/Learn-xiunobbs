@@ -33,7 +33,7 @@
        8. [route_mod.php](#route_mod.php)
        9. [route_browser.php](#route_browser.php)
 
-## <span id="route_index.php">route_index.php</span>
+### <span id="route_index.php">route_index.php</span>
 
 点击首页或默认时，进入此代码
 
@@ -48,7 +48,7 @@
 9. 再通过`$gid`过滤一下没有权限访问的主题`$threadlist`
 10. 编译并加载`view/htm/index.htm`
 
-## <span id="route_thread.php">route_thread.php</span>
+### <span id="route_thread.php">route_thread.php</span>
 
 点击主题时进入此代码
 
@@ -56,7 +56,7 @@
 
 分两部分
 
-### 发表主题帖
+#### 发表主题帖
 
 1. 检查用户是否已经登录
 
@@ -89,7 +89,7 @@
      7. 创建主题并返回主题`$tid`
      8. 发帖成功并返回版块页面
 
-### 查看帖子详情
+#### 查看帖子详情
 
 1. 获取主题id`$tid`
 2. 获取当前页面`$page`(这里的当前页是指帖子内跟帖的分页)
@@ -110,7 +110,7 @@
 
 
 
-## <span id="route_forum.php">route_forum.php</span>
+### <span id="route_forum.php">route_forum.php</span>
 
 点击版块列表中的版块进入此代码
 
@@ -127,9 +127,9 @@
 
 
 
-## <span id="route_user.php">route_user.php</span>
+### <span id="route_user.php">route_user.php</span>
 
-### 查看其它用户信息时进入
+#### 查看其它用户信息时进入
 
 1. 通过参数获取指定用户id`$_uid`，如果为空，则将当前用户id`$uid`赋值给`$_uid`
 2. 通过`$_uid`获取指定用户信息`$_user`
@@ -137,7 +137,7 @@
 
 
 
-### 查看其它用户的帖子时进入
+#### 查看其它用户的帖子时进入
 
 1. 通过参数获取指定用户id`$_uid`，如果为空，则将当前用户id`$uid`赋值给`$_uid`
 2. 通过`$_uid`获取指定用户信息`$_user`
@@ -152,7 +152,7 @@
 
 
 
-### 登录时进入
+#### 登录时进入
 
 1. 点击登录按钮
 2. 此时的`$method`为`GET`
@@ -170,7 +170,7 @@
 
 
 
-### 注册时进入
+#### 注册时进入
 
 1. 从全局配置`$conf`中读取是否允许用户注册
 2. 此时的`$method`为`GET`
@@ -194,13 +194,13 @@
 
 
 
-### 退出时进入
+#### 退出时进入
 
 1. 清空用户`token`
 
 
 
-### 重置密码的第1步进入
+#### 重置密码的第1步进入
 
 1. 从全局配置`$conf`中读取是否开启了密码找回功能
 2. 此时的`$method`为`GET`
@@ -212,7 +212,7 @@
 
 
 
-### 重置密码的第3步进入
+#### 重置密码的第3步进入
 
 1. 通过`$email`读取出`$_user`
 2. 此时`$method`为`GET`
@@ -223,11 +223,11 @@
 
 
 
-### 发送验证码进入
+#### 发送验证码进入
 
 
 
-### 同步登录进入
+#### 同步登录进入
 
 
 
@@ -235,7 +235,7 @@
 
 
 
-## <span id="route_my.php">route_my.php</span>
+### <span id="route_my.php">route_my.php</span>
 
 点击自己进入
 
@@ -243,7 +243,7 @@
 2. 通过`$uid`读取出用户信息`$user`
 3. 如果`$action`是数字的话，则将它置空
 
-### `$action`为空
+#### `$action`为空
 
 默认进入，展示用户基本信息
 
@@ -251,7 +251,7 @@
 
 
 
-### `$action`为`password`
+#### `$action`为`password`
 
 点击密码进入修改密码界面
 
@@ -268,7 +268,7 @@
 
 
 
-### `$action`为`thread`
+#### `$action`为`thread`
 
 点击`论坛帖子`进入
 
@@ -281,7 +281,7 @@
 
 
 
-### `$action`为`avatar`
+#### `$action`为`avatar`
 
 点击`头像`进入
 
@@ -295,7 +295,7 @@
 
 
 
-## <span id="route_attach.php">route_attach.php</span>
+### <span id="route_attach.php">route_attach.php</span>
 
 
 
@@ -303,14 +303,14 @@
 
 
 
-## <span id="route_post.php">route_post.php</span>
+### <span id="route_post.php">route_post.php</span>
 
 用户发帖进入
 
 1. 通过参数获取`$action`
 2. 检查用户是否登录
 
-### create
+#### create
 
 跟帖有两种模式：
 
@@ -345,7 +345,7 @@
 
 
 
-### update
+#### update
 
 修改帖子内容
 
@@ -379,7 +379,7 @@
 
 
 
-### delete
+#### delete
 
 删除帖子
 
@@ -397,13 +397,13 @@
 
 
 
-## <span id="route_mod.php">route_mod.php</span>
+### <span id="route_mod.php">route_mod.php</span>
 
 管理员对帖子进行`删除`、`移动`、`置顶`、`关闭`等操作时进入
 
 1. 获取管理操作`$action`
 
-### top置顶
+#### top置顶
 
 1. 此时`$method`为`GET`
 2. 编译并加载`view/htm/mod_top.htm`，展示置顶选项
@@ -421,7 +421,7 @@
 
 
 
-### close关闭
+#### close关闭
 
 1. 此时`$method`为`GET`
 2. 编译并加载`view/htm/mod_close.htm`，展示关闭选项
@@ -438,7 +438,7 @@
 
 
 
-### delete删除
+#### delete删除
 
 1. 此时`$method`为`GET`
 2. 编译并加载`view/htm/mod_delete.htm`，展示删除选项
@@ -454,7 +454,7 @@
 
 
 
-### move移动
+#### move移动
 
 1. 此时`$method`为`GET`
 2. 编译并加载`view/htm/mod_move.htm`，展示关闭选项
@@ -470,7 +470,7 @@
 
 
 
-### deleteuser删除用户
+#### deleteuser删除用户
 
 管理人员点击用户信息，有`删除用户`按钮
 
@@ -484,7 +484,77 @@
 
 
 
-## <span id="route_browser.php">route_browser.php</span>
+### <span id="route_browser.php">route_browser.php</span>
 
 此论坛不支持太低的浏览器版本，低版本访问量提示此页，有下载高版本浏览器链接。
 
+
+
+## admin/index.inc.php
+
+基本上和普通用户的`index.inc.php`相同
+
+- [route/forum.php](#admin_route_forum.php)
+- [route/group.php](#admin_route_group.php)
+- [route/index.php](#admin_route_index.php)
+- [route/other.php](#admin_route_other.php)
+- [route/plugin.php](#admin_route_plugin.php)
+- [route/setting.php](#admin_route_setting.php)
+- [route/thread.php](#admin_route_thread.php)
+- [route/user.php](#admin_route_user.php)
+
+
+
+### <span id="admin_route_forum.php">route/forum.php</span>
+
+点击`版块`进入
+
+1. 通过参数获取操作类型`$action`
+
+#### list
+
+默认情况下为`list`操作
+
+1. 此时的`$method`为`GET`
+2. 编译并加载`view/htm/forum_list.htm`页面
+3. 此时的`$method`为`POST`
+
+
+
+#### update
+
+
+
+#### delete
+
+
+
+
+
+### <span id="admin_route_group.php">route/group.php</span>
+
+
+
+### <span id="admin_route_index.php">route/index.php</span>
+
+登录时进入此代码
+
+
+
+### <span id="admin_route_other.php">route/other.php</span>
+
+
+
+### <span id="admin_route_plugin.php">route/plugin.php</span>
+
+
+
+### <span id="admin_route_setting.php">route/setting.php</span>
+
+
+
+### <span id="admin_route_thread.php">route/thread.php</span>
+
+
+
+### <span id="admin_route_user.php">route/user.php</span>
