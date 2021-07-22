@@ -580,6 +580,58 @@
 
 ### <span id="admin_route_group.php">route/group.php</span>
 
+#### list
+
+点击`用户`->`用户组`
+
+1. 默认显示所有用户组
+2. 通过参数获取`$action`，此时的`$action`为`list`
+3. 此时的`$method`为`GET`
+4. 获取系统用户组`$system_group`，这些用户组id为`0，1，2，3，4，5，6，7，101`
+5. 获取用户组最大id`$maxgid`
+6. 编译并加载`view/htm/group_list.htm`
+7. 页面展示用户组信息，对用户组信息进行修改或删除用户组，点击确定
+8. 此时的`$method`为`POST`
+9. 通过参数获取用户组id数组`$gidarr`
+10. 通过参数获取用户组名数组`$namearr`
+11. 通过参数获取起始积分数组`$creditsfromarr`
+12. 通过参数获取结束积分数组`$creditstoarr`
+13. 遍历`$gidarr`，以其中的一项为例
+14. 通过`gidarr`中的下标在其他数组中找出对应的数据
+15. 如果在全局组列表`$grouplist`没有找到`$k`，则说明是新创建的组
+16. 否则进行更新数据
+17. 通过`$grouplist`和`$gidarr`找出不同的地方，这说明是删除的组`$deletearr`
+18. 对`$deletearr`进行删除并清空删除组缓存
+
+#### update
+
+通过点击组后面的`编辑`进入
+
+1. 通过参数获取组id`$_gid`
+2. 通过`$_gid`获取用户组信息`$_group`
+3. 此时的`$method`为`GET`
+4. 编译并加载`view/htm/group_update.htm`
+5. 展示用户组详细信息
+6. 通过参数获取用户组名`$name`
+7. 通过参数获取起始积分`$creditsfrom`
+8. 通过参数获取结束积分`$creditsto`
+9. 通过参数获取权限允许看帖`$allowread`
+10. 通过参数获取权限发主题`$allowthread`
+11. 通过参数获取权限回帖`$allowpost`
+12. 通过参数获取权限上传`$allowattach`
+13. 通过参数获取权限下载`$allowdown`
+14. 将以上参数拼成一个数组
+15. 如果用户组id是`1 -- 5`，则还需要获取以下权限
+16. 通过参数获取权限置顶`$allowtop`
+17. 通过参数获取权限编辑`$allowupdate`
+18. 通过参数获取权限删除`$allowdelete`
+19. 通过参数获取权限移动`$allowmove`
+20. 通过参数获取权限禁止用户`$allowbanuser`
+21. 通过参数获取权限删除用户`$allowdeleteuser`
+22. 通过参数获取权限查看用户信息`$allowviewip`
+23. 把这些参数也添加到数组中去
+24. 使用这个数组对用户组进行更新
+
 
 
 ### <span id="admin_route_index.php">route/index.php</span>
@@ -590,18 +642,151 @@
 
 ### <span id="admin_route_other.php">route/other.php</span>
 
+点击`其他`
+
+清理缓存功能。
+
 
 
 ### <span id="admin_route_plugin.php">route/plugin.php</span>
+
+点击`插件`
 
 
 
 ### <span id="admin_route_setting.php">route/setting.php</span>
 
+点击`设置`
+
+1. 通过参数获取`$action`
+
+#### base
+
+默认进入此界面
+
+1. 此时的`$action`为`base`
+2. 此时的`$method`为`GET`
+3. 从全局配置`$conf`中读取信息
+4. 编译并加载`view/htm/setting_base.htm`
+5. 修改基本设置内容，点击确定
+6. 此时的`$method`为`POST`
+7. 通过参数获取站点名称`$sitename`、站点介绍`$sitebrief`、站点访问限制`$runlevel`、开启用户注册`$user_create_on`、开启注册邮箱验证`$user_create_email_on`、开启找回密码`$user_resetpw_on`、语言`$_lang`
+8. 对全局配置进行更新
+
+
+
+#### smtp
+
+点击`SMTP设置`进入此页面
+
+1. 此时的`$action`为`smtp`
+2. 此时的`$method`为`GET`
+3. 编译并加载`view/htm/setting_smtp.htm`
+4. 通过参数获取`$email`、`$host`、`$port`、`$user`、`$pass`
+5. 拼成一个数组更新smtp设置
+
 
 
 ### <span id="admin_route_thread.php">route/thread.php</span>
 
+点击`主题`
+
+#### list
+
+1. 默认页面为此页面，`$action`为`list`
+2. 获取所有的主题数`$threads`
+3. 计算出总页数`$totalpage`
+4. 编译并加载`view/htm/thread_list.htm`
+
+
+
+#### scan
+
+1. 填写搜索条件
+2. 通过`_SESSION`获取`$queueid`
+3. 通过参数获取用户id`$_uid`
+4. 如果`$_uid`不是数字，则把它当成用户名搜索出用户信息`$_user`和`$_uid`
+5. 通过参数获取版块id`$fid`
+6. 填充条件数组`$cond`
+7. 通过`$fid`获取所有的主题列表`$threadlist`
+8. 遍历`$threadlist`中的每一项，看是否符合条件
+
+
+
+#### found
+
+通过`点击查看`显示搜索结果
+
+1. 通过`_SESSION`获取`$queueid`
+2. 获取当前要显示的页`$page`
+3. 通过`$queueid`获取队列中的数量`$total`
+4. 对数据进行分页
+5. 编译并加载`view/htm/thread_found.htm`
+
+
+
+#### operation
+
+通过点击下面的`关闭`、`打开`、`删除`进行操作
+
+1. 通过`_SESSION`获取`$queueid`
+2. 通过参数获取操作类型`$op`
+3. 将队列中的数据一个接一个的弹出`$tid`
+4. 根据`$op`的类型对`$tid`进行对应的操作
+
 
 
 ### <span id="admin_route_user.php">route/user.php</span>
+
+点击用户，默认展示`用户列表`
+
+1. 通过参数获取`$action`
+
+#### list
+
+1. 设置每页显示数量`$pagesize`
+2. 通过参数获取搜索类型`$srchtype`
+3. 通过参数获取关键词`$keyword`
+4. 通过参数获取显示第几页`$page`
+5. 判断`$srchtype`是否是允许的几种方式
+6. 通过`$cond`获取出用户数量`$n`
+7. 通过查找条件`$cond`查找出用户列表`$userlist`
+8. 根据`$n`进行分页
+9. 编译并加载`view/htm/user_list.htm`
+
+
+
+#### create
+
+点击`用户`->`创建用户`
+
+1. 此时的`$method`为`GET`
+2. 编译并加载`view/htm/user_create.htm`
+3. 输入`email`、`用户名`、`密码`、`用户组`，并确定
+4. 此时的`$method`为`POST`
+5. 通过参数获取`$email`、`$username`、`$password`、`$_gid`
+6. 通过`$email`和`$username`查询数据库，是否已经注册
+7. 拼一个数组进行用户创建
+
+
+
+#### update
+
+点击用户后面的`编辑`操作
+
+1. 通过参数获取用户id`$_uid`
+2. 此时的`$method`为`GET`
+3. 编译并加载`view/htm/user_update.htm`
+4. 修改内容
+5. 通过参数获取`$email`、`$username`、`$password`、`$_gid`
+6. 通过`$_uid`获取出原始的用户数据`$old`
+7. 通过更新的数据和原始数据`old`对比出变化的部分`$update`
+8. 对变化部分`$update`进行更新
+
+
+
+#### delete
+
+1. 通过参数获取要删除用户的id`$_uid`
+2. 通过`$_uid`读取出用户信息`$_user`
+3. 通过`$_uid`删除用户
